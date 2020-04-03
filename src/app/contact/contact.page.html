@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/" text="Accueil"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Contact</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div *ngIf="nom && age" id="panel-info">
+        <p>nom : {{this.nom}}</p>
+        <p>age : {{this.age}}</p>
+
+        <p> {{ (age
+            < 18) ? 'tu es minueur' : ' tu es majeur' }}</p>
+    </div>
+
+    <div *ngIf="!nom || !age" id="panel-error">
+
+        <h4>Merci de remplir tous les champs.</h4>
+
+    </div>
+
+
+
+    <ion-input type="text" [(ngModel)]="name" text-right id="input" placeholder="Entrez votre nom"></ion-input>
+    <ion-input type="number" [(ngModel)]="age" text-right id="input" placeholder="Entrez votre age"></ion-input>
+    <ion-button expand="full" (click)="detailParams()">
+        Envoyer
+    </ion-button>
+
+    {{name}} {{age}}
+
+
+
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+        <input name="first" ngModel required #first="ngModel">
+        <input name="last" ngModel>
+        <button>Submit</button>
+    </form>
+
+    <p>First name value: {{ first.value }}</p>
+    <p>First name valid: {{ first.valid }}</p>
+    <p>Form value: {{ form.value | json }}</p>
+    <p>Form valid: {{ form.valid }}</p>
+</ion-content>
