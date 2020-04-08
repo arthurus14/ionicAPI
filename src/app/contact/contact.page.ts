@@ -6,6 +6,9 @@ import { AlertController,NavController} from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.page.html',
@@ -18,8 +21,24 @@ export class ContactPage implements OnInit {
   nom:string;
   response:any;
 
-  constructor( private route: ActivatedRoute) { 
-    
+  results: Observable<any>;
+
+  pseudo:string
+  //url = 'https://api.github.com/users/arthurus14';
+
+  films: Observable<any>;
+
+  constructor( private route: ActivatedRoute, public httpClient: HttpClient) { 
+
+  
+
+
+    this.films = this.httpClient.get('https://api.github.com/users/arthurus14');
+    this.films
+    .subscribe(data => {
+      console.log('my data: ', data);
+      console.log('pseudo: ', data['login']);
+    })
   }
    
   ngOnInit() {
@@ -28,7 +47,10 @@ export class ContactPage implements OnInit {
       this.age = params['age']; 
       console.log("params "+this.nom+ " "+ this.age);
  });
+
+ 
    
+ 
   }
 
   detailParams(){
