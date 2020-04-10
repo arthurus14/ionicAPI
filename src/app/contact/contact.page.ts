@@ -24,6 +24,10 @@ export class ContactPage implements OnInit {
   results: Observable<any>;
 
   pseudo:string
+  id:number;
+  nameUser:string;
+  img:string;
+  repos:number;
   //url = 'https://api.github.com/users/arthurus14';
 
   films: Observable<any>;
@@ -38,7 +42,17 @@ export class ContactPage implements OnInit {
     .subscribe(data => {
       console.log('my data: ', data);
       console.log('pseudo: ', data['login']);
+      console.log('id: ', data['id']);
+      console.log('avatar: ', data['avatar_url']);
+
+      return this.pseudo =  data['login'],
+       this.id =  data['id'],
+       this.nameUser = data['name'],
+       this.img = data['avatar_url'],
+       this.repos = data['public_repos'];
     })
+
+    
   }
    
   ngOnInit() {

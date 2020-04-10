@@ -9,8 +9,13 @@
 
 <ion-content>
 
-    <div *ngIf="nom && age" id="panel-info">
-        <p>nom : {{this.nom}}</p>
+    <div class="header" *ngIf="nom && age">
+        <h2>{{this.nom}}</h2>
+
+        <div class="space-between">
+            <p>repository : {{this.repos}} </p>
+        </div>
+
         <p>age : {{this.age}}</p>
 
         <p> {{ (age
@@ -23,7 +28,14 @@
 
     </div>
 
+    <div>
+        <p>Pseudo github : {{this.pseudo}}</p>
+        <p>Id github : {{this.id}}</p>
+        <p>Nom github : {{this.nameUser}}</p>
 
+        <p>Avatar :</p>
+        <img data-src='{{this.img}}' />
+    </div>
 
     <ion-input type="text" [(ngModel)]="name" text-right id="input" placeholder="Entrez votre nom"></ion-input>
     <ion-input type="number" [(ngModel)]="age" text-right id="input" placeholder="Entrez votre age"></ion-input>

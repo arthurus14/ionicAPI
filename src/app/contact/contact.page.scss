@@ -1,0 +1,19 @@
+.header {
+    background-color: #22a2e6;
+    height: 180px;
+    padding-top: 1px;
+}
+
+.header h2 {
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0px 10ox;
+    margin-left: 1px;
+}
