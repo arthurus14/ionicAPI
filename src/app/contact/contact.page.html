@@ -13,48 +13,82 @@
         <h2>{{this.nom}}</h2>
 
         <div class="space-between">
-            <p>repository : {{this.repos}} </p>
+            <div class="followings">
+                <ion-badge color="primary">{{this.repos}}</ion-badge>
+                <p>repositories</p>
+            </div>
+
         </div>
-
-        <p>age : {{this.age}}</p>
-
-        <p> {{ (age
-            < 18) ? 'tu es minueur' : ' tu es majeur' }}</p>
+    </div>
+    <div class=flex>
+        <div class="border-blue">
+            <div class="border-white">
+                <div class="image-box">
+                    <img data-src='{{this.img}}' />
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div *ngIf="!nom || !age" id="panel-error">
+    <ion-card *ngFor="let item of items">
+        <ion-item lines="none">
+            <ion-label>
+                <h2><b>{{item.name}}</b></h2>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none" class="tweet">
+            <ion-label text-wrap>
+                {{item.description}}
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="eye-outline" class="view"></ion-icon>
+            <ion-label class='compteur'>{{item.watchers_count}}</ion-label>
 
-        <h4>Merci de remplir tous les champs.</h4>
+            <ion-icon name="code-slash-outline"></ion-icon>
+            <ion-label class='compteur'>{{item.language}}</ion-label>
 
-    </div>
+        </ion-item>
 
-    <div>
-        <p>Pseudo github : {{this.pseudo}}</p>
-        <p>Id github : {{this.id}}</p>
-        <p>Nom github : {{this.nameUser}}</p>
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label class='compteur'>{{item.updated_at}}</ion-label>
+    </ion-card>
 
-        <p>Avatar :</p>
-        <img data-src='{{this.img}}' />
-    </div>
+    <p>age : {{this.age}}</p>
 
-    <ion-input type="text" [(ngModel)]="name" text-right id="input" placeholder="Entrez votre nom"></ion-input>
-    <ion-input type="number" [(ngModel)]="age" text-right id="input" placeholder="Entrez votre age"></ion-input>
-    <ion-button expand="full" (click)="detailParams()">
-        Envoyer
-    </ion-button>
+    <p> {{ (age
+        < 18) ? 'tu es minueur' : ' tu es majeur' }}</p>
 
-    {{name}} {{age}}
+            <div *ngIf="!nom || !age" id="panel-error">
+
+                <h4>Merci de remplir tous les champs.</h4>
+
+            </div>
+
+            <div>
+                <p>Pseudo github : {{this.pseudo}}</p>
+                <p>Id github : {{this.id}}</p>
+                <p>Nom github : {{this.nameUser}}</p>
+            </div>
+
+            <ion-input type="text" [(ngModel)]="name" text-right id="input" placeholder="Entrez votre nom"></ion-input>
+            <ion-input type="number" [(ngModel)]="age" text-right id="input" placeholder="Entrez votre age"></ion-input>
+            <ion-button expand="full" (click)="detailParams()">
+                Envoyer
+            </ion-button>
+
+            {{name}} {{age}}
 
 
 
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
-        <input name="first" ngModel required #first="ngModel">
-        <input name="last" ngModel>
-        <button>Submit</button>
-    </form>
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+                <input name="first" ngModel required #first="ngModel">
+                <input name="last" ngModel>
+                <button>Submit</button>
+            </form>
 
-    <p>First name value: {{ first.value }}</p>
-    <p>First name valid: {{ first.valid }}</p>
-    <p>Form value: {{ form.value | json }}</p>
-    <p>Form valid: {{ form.valid }}</p>
+            <p>First name value: {{ first.value }}</p>
+            <p>First name valid: {{ first.valid }}</p>
+            <p>Form value: {{ form.value | json }}</p>
+            <p>Form valid: {{ form.valid }}</p>
 </ion-content>

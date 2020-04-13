@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-contact',
@@ -28,13 +29,23 @@ export class ContactPage implements OnInit {
   nameUser:string;
   img:string;
   repos:number;
+
+  titre:string;
+  auteur:string;
+  description:string;
+
+  i:number;
   //url = 'https://api.github.com/users/arthurus14';
 
   films: Observable<any>;
+  repository : Observable<any>;
+  public items:any;
+
+
 
   constructor( private route: ActivatedRoute, public httpClient: HttpClient) { 
 
-  
+
 
 
     this.films = this.httpClient.get('https://api.github.com/users/arthurus14');
@@ -52,6 +63,16 @@ export class ContactPage implements OnInit {
        this.repos = data['public_repos'];
     })
 
+   
+
+    let info:Observable<any>
+    info = this.httpClient.get('https://api.github.com/users/arthurus14/repos');
+    info.subscribe(data => {
+      this.items = data;
+      console.log('my data repositories: ', data);
+    
+       
+    })
     
   }
    
@@ -81,6 +102,11 @@ export class ContactPage implements OnInit {
   onSubmit(form: NgForm) {
     console.log(form.value);  // { first: '', last: '' }
     console.log(form.valid);  // false
+  }
+
+  getData(){
+    
+  
   }
 
 }
