@@ -37,12 +37,16 @@ export class ContactPage implements OnInit {
   i:number;
   //url = 'https://api.github.com/users/arthurus14';
 
+
+  url:any;
+  commit:any;
+
   films: Observable<any>;
   repository : Observable<any>;
   public items:any;
+  public objs:any;
 
-
-
+ 
   constructor( private route: ActivatedRoute, public httpClient: HttpClient) { 
 
 
@@ -74,6 +78,26 @@ export class ContactPage implements OnInit {
        
     })
     
+    //https://github.com/arthurus14/FPS-WebGL/commit/1c764f750b868484e5b4b0a4c2e3924897b915f6
+    //https://api.github.com/repos/arthurus14/FPS-WebGL/branches/master
+
+    let text:Observable<any>
+    text = this.httpClient.get('https://api.github.com/repos/arthurus14/FPS-WebGL/branches/master');
+    text.subscribe(data => {
+      this.objs = data;
+      console.log('text: ', data);
+      console.log('commit est égal à ', data['name']);
+      console.log('commit ', data.name);
+
+      console.log('tree ', data.commit);
+      console.log('url ', data.commit.url);
+
+     return this.commit = data.name,
+      this.url =  data.commit.url;
+    
+       
+    })
+
   }
    
   ngOnInit() {
